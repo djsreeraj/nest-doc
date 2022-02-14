@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateCustomerDto } from './create-customer.dto';
 
 @Controller('customers')
 export class CustomersController {
@@ -20,5 +21,10 @@ export class CustomersController {
     @Post()
     create(): string {
         return 'This creates a new customer'
+    }
+
+    @Post('/new')
+    createNew(@Body() createCustomerDto: CreateCustomerDto) {
+        return 'This action adds a new customer'
     }
 }
