@@ -12,6 +12,11 @@ export class CustomersController {
         return `This action find customer with id: #${params.id}`
     }
 
+    @Get('user/:username')
+    findbyUsername(@Param('username') username: string): string {
+        return `This action find customer with username: ${username}`
+    }
+
     @Post()
     create(): string {
         return 'This creates a new customer'
