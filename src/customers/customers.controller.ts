@@ -1,30 +1,46 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ICustomer } from 'src/interfaces/customer.interface';
 import { CreateCustomerDto } from './create-customer.dto';
+import { CustomersService } from './customers.service';
 
 @Controller('customers')
 export class CustomersController {
-    @Get()
-    findAll(): string {
-        return 'This action returns all customers';
-    }
-
-    @Get(':id')
-    findbyId(@Param() params): string {
-        return `This action find customer with id: #${params.id}`
-    }
-
-    @Get('user/:username')
-    findbyUsername(@Param('username') username: string): string {
-        return `This action find customer with username: ${username}`
-    }
+    constructor(private customersService: CustomersService) { }
 
     @Post()
-    create(): string {
-        return 'This creates a new customer'
+    async create(@Body() createCustomerDto: CreateCustomerDto) {
+        this.customersService.create(createCustomerDto)
     }
 
-    @Post('/new')
-    createNew(@Body() createCustomerDto: CreateCustomerDto) {
-        return 'This action adds a new customer'
+    @Get()
+    async findAll(): Promise<ICustomer[]> {
+        return this.customersService.findAll();
     }
+
+
+
+    // @Get()
+    // findAll(): string {
+    //     return 'This action returns all customers';
+    // }
+
+    // @Get(':id')
+    // findbyId(@Param() params): string {
+    //     return `This action find customer with id: #${params.id}`
+    // }
+
+    // @Get('user/:username')
+    // findbyUsername(@Param('username') username: string): string {
+    //     return `This action find customer with username: ${username}`
+    // }
+
+    // @Post()
+    // create(): string {
+    //     return 'This creates a new customer'
+    // }
+
+    // @Post('/new')
+    // createNew(@Body() createCustomerDto: CreateCustomerDto) {
+    //     return 'This action adds a new customer'
+    // }
 }
