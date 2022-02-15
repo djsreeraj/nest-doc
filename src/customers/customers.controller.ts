@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ICustomer } from 'src/interfaces/customer.interface';
-import { CreateCustomerDto } from './create-customer.dto';
+import { ICustomer } from 'src/customers/interfaces/customer.interface';
+import { CreateCustomerDto } from './dto/create-customer.dto';
 import { CustomersService } from './customers.service';
 
 @Controller('customers')
